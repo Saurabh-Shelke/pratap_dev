@@ -242,3 +242,18 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+doc_events = {
+    "Quotation": {
+        "before_save": "pratap_dev.calculation.po_calculation_by_weight"
+    },
+    "Sales Order": {
+        "before_save": "pratap_dev.calculation.po_calculation_by_weight"
+    },
+     "Sales Invoice": {
+        "before_save": "pratap_dev.calculation.po_calculation_by_weight"
+    },
+     "Delivery Note": {
+        "before_save": "pratap_dev.calculation.po_calculation_by_weight"
+    }
+
+}

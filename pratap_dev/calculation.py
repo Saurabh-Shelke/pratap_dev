@@ -10,7 +10,7 @@ def po_calculation_by_weight(doc, method):
 
     for item in doc.items:
         try:
-            custom_rate = float(item.custom_rate_in_kg or 0)
+            custom_rate = float(item.custom_filling_capacity or 0)
             weight_per_unit = float(item.weight_per_unit or 0)
             qty = float(item.qty or 0)
             normal_rate = float(item.rate or 0)
@@ -58,7 +58,6 @@ def po_calculation_by_weight(doc, method):
     doc.base_net_total = total_doc_amount
 
     frappe.msgprint("✅ Weight/custom pricing applied")
-
 
 
 

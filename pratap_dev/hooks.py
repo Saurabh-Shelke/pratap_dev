@@ -255,5 +255,4 @@ doc_events = {
      "Delivery Note": {
         "before_save": "pratap_dev.calculation.po_calculation_by_weight"
     }
-
 }

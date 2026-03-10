@@ -98,7 +98,6 @@ def po_calculation_by_weight(doc, method):
                 item.net_rate = final_rate
                 item.base_rate = final_rate
                 item.base_net_rate = final_rate
-
                 item.amount = final_amount
                 item.net_amount = final_amount
                 item.base_amount = final_amount
@@ -130,6 +129,138 @@ def po_calculation_by_weight(doc, method):
     doc.base_net_total = total_doc_amount
 
 
+def enquiry_calculation_by_weight(doc, method):
+
+    total_doc_amount = 0
+
+    for item in doc.custom_items_table:
+        try:
+            custom_rate = float(item.custom_rate_in_kg or 0)
+            weight_per_unit = float(item.custom_filling_capacity or 0)
+            qty = float(item.qty or 0)
+            normal_rate = float(item.rate or 0)
+            apply_weight_calc = item.custom_calculate_based_on_weight or 0
+        except Exception:
+            continue
+
+        # ============================================
+        # 🟢 APPLY ONLY IF ITEM CHECKBOX IS ENABLED
+        # ============================================
+        if apply_weight_calc:
+
+            # ==============================
+            # CASE 1 → Custom rate entered
+            # ==============================
+            if custom_rate > 0:
+
+                if weight_per_unit > 0:
+                    final_rate = round(custom_rate * weight_per_unit, 2)
+                else:
+                    final_rate = round(custom_rate, 2)
+
+                final_amount = round(final_rate * qty, 2)
+
+                # 🔥 Update all rate fields
+                item.rate = final_rate
+                item.net_rate = final_rate
+                item.base_rate = final_rate
+                item.base_net_rate = final_rate
+                item.amount = final_amount
+                item.net_amount = final_amount
+                item.base_amount = final_amount
+                item.base_net_amount = final_amount
+                item.taxable_value = final_amount
+
+                total_doc_amount += final_amount
+
+            # ==============================
+            # CASE 2 → Checkbox ON but rate 0
+            # ==============================
+            else:
+                normal_amount = round(normal_rate * qty, 2)
+                total_doc_amount += normal_amount
+
+        # ============================================
+        # 🟡 CHECKBOX NOT ENABLED → NORMAL ERP RATE
+        # ============================================
+        else:
+            normal_amount = round(normal_rate * qty, 2)
+            total_doc_amount += normal_amount
+
+    # ============================================
+    # 🔵 UPDATE DOCUMENT TOTALS
+    # ============================================
+    doc.total = total_doc_amount
+    doc.net_total = total_doc_amount
+    doc.base_total = total_doc_amount
+    doc.base_net_total = total_doc_amount
+
+
+def product_table_calculation_by_weight(doc, method):
+
+    total_doc_amount = 0
+
+    for item in doc.product_table:
+        try:
+            custom_rate = float(item.custom_rate_in_kg or 0)
+            weight_per_unit = float(item.custom_filling_capacity or 0)
+            qty = float(item.qty or 0)
+            normal_rate = float(item.rate or 0)
+            apply_weight_calc = item.custom_calculate_based_on_weight or 0
+        except Exception:
+            continue
+
+        # ============================================
+        # 🟢 APPLY ONLY IF ITEM CHECKBOX IS ENABLED
+        # ============================================
+        if apply_weight_calc:
+
+            # ==============================
+            # CASE 1 → Custom rate entered
+            # ==============================
+            if custom_rate > 0:
+
+                if weight_per_unit > 0:
+                    final_rate = round(custom_rate * weight_per_unit, 2)
+                else:
+                    final_rate = round(custom_rate, 2)
+
+                final_amount = round(final_rate * qty, 2)
+
+                # 🔥 Update all rate fields
+                item.rate = final_rate
+                item.net_rate = final_rate
+                item.base_rate = final_rate
+                item.base_net_rate = final_rate
+                item.amount = final_amount
+                item.net_amount = final_amount
+                item.base_amount = final_amount
+                item.base_net_amount = final_amount
+                item.taxable_value = final_amount
+
+                total_doc_amount += final_amount
+
+            # ==============================
+            # CASE 2 → Checkbox ON but rate 0
+            # ==============================
+            else:
+                normal_amount = round(normal_rate * qty, 2)
+                total_doc_amount += normal_amount
+
+        # ============================================
+        # 🟡 CHECKBOX NOT ENABLED → NORMAL ERP RATE
+        # ============================================
+        else:
+            normal_amount = round(normal_rate * qty, 2)
+            total_doc_amount += normal_amount
+
+    # ============================================
+    # 🔵 UPDATE DOCUMENT TOTALS
+    # ============================================
+    doc.total = total_doc_amount
+    doc.net_total = total_doc_amount
+    doc.base_total = total_doc_amount
+    doc.base_net_total = total_doc_amount
 
 
 

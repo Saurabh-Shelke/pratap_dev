@@ -26,7 +26,8 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/pratap_dev/css/pratap_dev.css"
-# app_include_js = "/assets/pratap_dev/js/pratap_dev.js"
+
+# app_include_js = ["/assets/pratap_dev/js/global_autosave.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/pratap_dev/css/pratap_dev.css"
@@ -254,5 +255,15 @@ doc_events = {
     },
      "Delivery Note": {
         "before_save": "pratap_dev.calculation.po_calculation_by_weight"
-    }
+    },
+     "Opportunity": {
+        "before_save": "pratap_dev.calculation.enquiry_calculation_by_weight"
+    },
+     "Sample Request": {
+        "before_save": "pratap_dev.calculation.product_table_calculation_by_weight"
+    },
+     "Product Trial": {
+        "before_save": "pratap_dev.calculation.product_table_calculation_by_weight"
+    },
+    
 }

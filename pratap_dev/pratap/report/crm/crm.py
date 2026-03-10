@@ -50,6 +50,7 @@ def get_columns():
 	]
 
 
+
 def get_data(filters):
 	"""
 	Build rows for full flow: Prospect → Opportunity → Sample Request → Product Trial → Quotation.
@@ -168,7 +169,7 @@ def get_data(filters):
 	pt_names = [pt_by_opp[o]["name"] for o in pt_by_opp if pt_by_opp[o].get("name")]
 	if pt_names and frappe.get_meta("Quotation").has_field("custom_product_trial"):
 		quo_by_pt = frappe.get_all(
-			"Quotation",
+					"Quotation",
 			filters=[["custom_product_trial", "in", pt_names], ["docstatus", "<", 2]],
 			fields=["name", "opportunity", "custom_product_trial", "transaction_date", "grand_total", "total", "currency"],
 		)
@@ -221,7 +222,7 @@ def get_data(filters):
 			"opportunity_amount": flt(po.get("amount") or opp.get("opportunity_amount"), 2),
 			"opportunity_total": flt(opp.get("total"), 2),
 			"expected_closing": po.get("expected_closing") or opp.get("expected_closing"),
-			"currency": currency,
+			"currency": currency,	
 			"sample_request": sr_doc.get("name") if sr_doc else None,
 			"sample_request_amount": flt(sr_amount, 2) if sr_amount is not None else None,
 			"sample_dispatch_date": sr_doc.get("dispatch_date") if sr_doc else None,

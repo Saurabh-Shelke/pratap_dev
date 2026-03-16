@@ -263,7 +263,7 @@ doc_events = {
         "before_save": "pratap_dev.calculation.product_table_calculation_by_weight"
     },
      "Product Trial": {
-        "before_save": "pratap_dev.calculation.product_table_calculation_by_weight"
+        "before_save": "pratap_dev.calculation.product_table_cal_by_weight"
     },
     
 }

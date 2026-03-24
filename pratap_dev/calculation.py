@@ -252,6 +252,17 @@ def product_table_calculation_by_weight(doc, method):
         # ============================================
         else:
             normal_amount = round(normal_rate * qty, 2)
+            item.rate = normal_rate
+            item.net_rate = normal_rate
+            item.base_rate = normal_rate
+            item.base_net_rate = normal_rate
+
+            item.amount = normal_amount
+            item.net_amount = normal_amount
+            item.base_amount = normal_amount
+            item.base_net_amount = normal_amount
+
+            item.taxable_value = normal_amount
             total_doc_amount += normal_amount
 
     # ============================================

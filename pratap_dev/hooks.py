@@ -265,5 +265,11 @@ doc_events = {
      "Product Trial": {
         "before_save": "pratap_dev.calculation.product_table_cal_by_weight"
     },
+     "Complaint": {
+        "before_save": "pratap_dev.calculation.complain_table_cal_by_weight"
+    },
+     "TSA Request": {
+        "before_save": "pratap_dev.calculation.tsa_table_cal_by_weight"
+    },
     
 }
